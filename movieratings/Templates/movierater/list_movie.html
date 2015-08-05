@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>List of Movie Ratings</title>
 </head>
 <body>
-
+    <h1>Here is the list of Movie Ratings</h1>
+        <ul>
+        {% for movie in movies %}
+            <li><a href="{% url 'detail_movie' movie.pk %}">{{ movie.title }}{{ movie.genre }}</a></li>
+        {% endfor %}
+    </ul>
 </body>
 </html>

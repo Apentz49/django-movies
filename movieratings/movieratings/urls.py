@@ -17,5 +17,9 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
+    url(r'^movierater/', include('movierater.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', 'movierater.views.list_movie', name='listmovie'),
+    url(r'(?P<movie_id>[0-9]+)/', 'movierater.views.detail_movie', name="detailmovie"),
+    url(r'(?P<rater_id>[0-9]+)/', 'movierater.views.rater_detail', name="raterdetail"),
 ]

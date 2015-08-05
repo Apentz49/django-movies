@@ -3,50 +3,54 @@ import json
 
 print("Converting users...")
 users = []
-with open("data/ml-1m/users.dat") as infile:
+with open("users.dat") as infile:
     reader = csv.reader((line.replace("::", ";") for line in infile),
                         delimiter=";")
     for row in reader:
         users.append({"model": "movierater.Rater",
                       "pk": row[0],
                       "fields": {
+                          "gender": row[1],
                           "age": row[2],
+                          "occupation": row[3],
                           "zip_code": row[4]
                       }})
 
-with open("movieratings/fixtures/users.json", "w") as outfile:
+with open("fixtures/users.json", "w") as outfile:
     outfile.write(json.dumps(users))
 
 print("Converting movies...")
 movies = []
-with open("data/ml-1m/movies.dat", encoding="windows-1252") as infile:
+with open("movies.dat", encoding="windows-1252") as infile:
     reader = csv.reader((line.replace("::", ";") for line in infile),
                         delimiter=";")
     for row in reader:
-        movies.append({"model": "movies.Movie",
+        movies.append({"model": "movierater.Movie",
                        "pk": row[0],
                        "fields": {
-                           "title": row[1]
+                           "title": row[1],
+                           "genre": row[2]
                        }})
 
-with open("movieratings/fixtures/movies.json", "w") as outfile:
+with open("fixtures/movies.json", "w") as outfile:
     outfile.write(json.dumps(movies))
 
 print("Converting ratings...")
 ratings = []
-with open("data/ml-1m/ratings.dat") as infile:
+with open("ratings.dat") as infile:
     reader = csv.reader((line.replace("::", ";") for line in infile),
                         delimiter=";")
     for idx, row in enumerate(reader):
-        ratings.append({"model": "movies.Rating",
+        ratings.append({"model": "movierater.Rating",
                         "pk": idx + 1,
                         "fields": {
                             "rater": row[0],
                             "movie": row[1],
-                            "rating": row[2]
+                            "rating": row[2],
+                            "timestamp": row[3]
                         }})
 
-with open("movieratings/fixtures/ratings.json", "w") as outfile:
+with open("fixtures/ratings.json", "w") as outfile:
     outfile.write(json.dumps(ratings))
 
 
