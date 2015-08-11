@@ -37,6 +37,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
+    'debug_toolbar',
+    'bootstrap3',
     'movierater'
 )
 
@@ -75,14 +78,23 @@ WSGI_APPLICATION = 'movieratings.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'movies',
+        'USER': 'AaronPentz',
+        'PASSWORD': '',
+        'HOST': '127.0.0.1',
+        'PORT': '',
     }
 }
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
@@ -96,8 +108,22 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
+LOGIN_URL = '/login'
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIR = (
+    os.path.join(BASE_DIR, 'global/'),
+)
+
+# STATIC_ROOT = os.path.join(BASE_DIR, "global/")
+
+BOOTSTRAP3 = {
+    'jquery_url': '/global/jquery-2.1.4.min.js',
+
+    'base_url': '/global/bootstrap',
+
+    'theme_url': '/global/bootstrap/css/slate.css',
+
+    'include_jquery': True,
+}

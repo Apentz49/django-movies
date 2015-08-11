@@ -4,7 +4,7 @@ from django.contrib import admin
 from .models import Rater, Movie, Rating
 
 class RaterAdmin(admin.ModelAdmin):
-    list_display = ('gender', 'age', 'occupation', 'zip_code')
+    list_display = ('gender', 'age', 'occupation', 'zip_code', 'user',)
 
 class MovieAdmin(admin.ModelAdmin):
     list_display = ('title', 'genre')
