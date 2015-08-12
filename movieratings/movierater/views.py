@@ -1,12 +1,7 @@
 import datetime
-from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.core.urlresolvers import reverse_lazy
 from django.db.models import Avg
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
-from django.template import loader, RequestContext
 from django.views.generic import ListView, DetailView, CreateView
-from movierater.forms import RatingForm
 from movierater.models import Rater, Movie, Rating, Category
 
 
