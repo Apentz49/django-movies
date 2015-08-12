@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
+    <h1>Here are the top 20 movies in {{ category.category }}</h1>
+
+    <h2>{% for category in movie.tag.all %}</h2>
+        <li><a href="{% url 'movie_genres' tag.pk %}">{{ tag }}></a></li>
+    {% endfor %}
+    <ol>
+        {% for movie in avg_rating %}
+            <li><a href="{% url 'detail_movie' movie.pk %}">
+                <p>Title: {{ movie.title }} Avg. Rating: {{ movie.avg_rating | floatformat:1 }}</p>
+                </a></li>
+        {% endfor %}
+    </ol>
+
+{% endblock %}

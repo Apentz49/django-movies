@@ -1,12 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Movie Detail</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
         <h1>Movie Details</h1>
     <p>Title: {{ movie.title }}</p>
     <p>Genre: {{ movie.genre }}</p>
-</body>
-</html>
+    <p>Avg. Rating: {{ movie.avg_rating | floatformat:1}}</p>
+        <ol>
+        All Ratings: {% for rating in movie.all_rater_ratings %}
+            <li><a href="{% url 'rater_detail' rating.rater.pk %}">
+                Rater: {{ rating.rater.pk }}
+                Rating: {{ rating.rating }}</a></li>
+
+            {% endfor %}
+        </ol>
+{% endblock %}

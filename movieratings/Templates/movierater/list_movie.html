@@ -1,15 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>List of Movie Ratings</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
     <h1>Here is the list of Movie Ratings</h1>
+
         <ul>
-        {% for movie in movies %}
-            <li><a href="{% url 'detail_movie' movie.pk %}">{{ movie.title }}{{ movie.genre }}</a></li>
+        {% for movie in movie_list %}
+            <li><a href="{% url 'detail_movie' movie.pk %}">
+                {{ movie.title }} {{ movie.genre }}</a></li>
         {% endfor %}
     </ul>
-</body>
-</html>
+
+        {% if is_paginated %}
+    <p>
+        {% if page_obj.has_previous %}
+            <a href="{% url 'list_movie' %}?page={{ page_obj.previous_page_number }}"><-Prev</a>
+        {% endif %}
+        {{ page_obj }}
+        {% if page_obj.has_next %}
+            <a href="{% url 'list_movie' %}?page={{ page_obj.next_page_number }}">Next-></a>
+        {% endif %}
+    </p>
+    {% endif %}
+    <p>
+        Loaded at: {{ page_load }}
+    </p>
+{% endblock %}

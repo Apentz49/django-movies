@@ -4,6 +4,12 @@ from django.db import models
 from django.db.models import Avg
 
 
+class Category(models.Model):
+    category = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.category
+
 
 class Rater(models.Model):
 
@@ -21,10 +27,12 @@ class Rater(models.Model):
                 .format(self.id, self.gender, self.age, self.occupation, self.zip_code)
 
 
+
 class Movie(models.Model):
 
     genre = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
+    tag = models.ManyToManyField(Category)
 
     def all_rater_ratings(self):
         return self.rating_set.all()
@@ -35,7 +43,7 @@ class Movie(models.Model):
             return avg_rating
 
     def __str__(self):
-        return "{} {}".format(self.id, self.title)
+        return "{} {} {}".format(self.id, self.title, self.genre)
 
 
 class Rating(models.Model):
@@ -59,3 +67,4 @@ class Rating(models.Model):
 #     rater.user = User.objects.create_user(username=rater.pk, email="yo@tiy.com", password="1")
 #     rater.save()
 #     print("User Created")
+
